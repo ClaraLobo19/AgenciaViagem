@@ -2,6 +2,7 @@ package model;
 import java.util.Date;
 
 public class ClienteLogin {
+	//11 VARIÁVEIS, INCLUINDO ID
 	int ID_cliente;
 	private String nome_Cliente;
 	private String CPF_cliente;
@@ -9,6 +10,9 @@ public class ClienteLogin {
 	private String email_cliente;
 	private String telefone_Cliente;
 	private Date data_Nascimento;
+	private String endereco;;
+	private String cidade;
+	private String estado;
 	private String senha;
 	
 	
@@ -17,6 +21,28 @@ public class ClienteLogin {
 		return "ClienteLogin [ID_cliente=" + ID_cliente + ", Nome_Cliente=" + nome_Cliente + ", email_cliente="
 				+ email_cliente + "]";
 	}
+	
+	
+	
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
 	public int getID_cliente() {
 		return ID_cliente;
 	}

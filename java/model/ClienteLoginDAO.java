@@ -12,7 +12,7 @@ public class ClienteLoginDAO {
 /*****************************MÉTODO SAVE****************************** */	
 	public void save(ClienteLogin cliente) {
 
-		String sql= "INSERT INTO cliente_Login( NOME_CLIENTE,  CPF_Cliente, RG_Cliente, email_Cliente, telefone_Cliente, Data_Nascimento, Senha)"+ " VALUES(?,?,?,?,?,?,?)";
+		String sql= "INSERT INTO CLIENTE_LOGIN(NOME_CLIENTE,CPF_Cliente,RG_Cliente,Email_Cliente,Telefone_CLiente,Data_Nascimento,Senha,Endereco,Estado,Cidade)"+ " VALUES(?,?,?,?,?,?,?,?,?,?)";
 		Connection conn= null;
 		PreparedStatement pstm= null;
 		
@@ -27,8 +27,13 @@ public class ClienteLoginDAO {
 			 pstm.setString(3, cliente.getRG_cliente());
 			 pstm.setString(4, cliente.getEmail_cliente());
 			 pstm.setString(5, cliente.getTelefone_Cliente());
-			 pstm.setDate(6, new Date(cliente.getData_Nascimento().getTime()));
+			 //pstm.setDate(6, new Date(cliente.getData_Nascimento().getTime()));
 			 pstm.setString(7, cliente.getSenha());
+			 pstm.setString(8,  cliente.getEndereco());
+			 pstm.setString(9,  cliente.getEstado());
+			 pstm.setString(10,  cliente.getCidade());
+			
+			 //pstm.setString(10, cliente.getSenha());
 			 
 			 // Executaa sql para inserção dos dados 
 			 pstm.execute();
@@ -45,11 +50,9 @@ public class ClienteLoginDAO {
 					conn.close();
 				}
 		    }
-			catch(Exception e) {
-				e.printStackTrace();
-				}
-			}
-		}
+			catch(Exception e) { e.printStackTrace(); }
+		  }
+	}
 
 	
 	
@@ -88,7 +91,7 @@ public class ClienteLoginDAO {
 	
 	
 		public void update(ClienteLogin cliente ) {//RECEBE TODO O OBJETO
-			String sql="UPDATE Cliente_Login SET  nome_cliente = ?, cpf_cliente = ? ,rg_cliente = ?, email_Cliente=?, Telefone_cliente = ?, Data_Nascimento=?, Senha=?" + "WHERE ID_Cliente = ?";// SÃO COLUNAS DA TABELA NO MYSQL
+			String sql="UPDATE Cliente_Login SET  nome_cliente = ?, cpf_cliente = ? ,rg_cliente = ?, email_Cliente=?, Telefone_cliente = ?, Data_Nascimento=?,Endereco=?, Cidade=?, Estado=?, Senha=?" + "WHERE ID_Cliente = ?";// SÃO COLUNAS DA TABELA NO MYSQL
 			Connection conn= null;
 			PreparedStatement pstm= null;
 			
@@ -104,6 +107,9 @@ public class ClienteLoginDAO {
 				 pstm.setString(4, cliente.getEmail_cliente());
 				 pstm.setString(5, cliente.getTelefone_Cliente());
 				 pstm.setDate(6, new Date(cliente.getData_Nascimento().getTime()));
+				 pstm.setString(7,cliente.getEndereco() );
+				 pstm.setString(8,cliente.getCidade() );
+				 pstm.setString(9,cliente.getEstado() );
 				 pstm.setString(7, cliente.getSenha());
 				 
 				// EXECUTAR SQL PARA INSERÇÃO DE DADOS 
@@ -146,6 +152,9 @@ public class ClienteLoginDAO {
 				cliente.setEmail_cliente(rset.getString("Email"));
 				cliente.setTelefone_Cliente(rset.getString("Telefone"));
 				cliente.setData_Nascimento(rset.getDate("Data de Nascimento"));
+				cliente.setCidade(rset.getString("Endereco"));
+				cliente.setCidade(rset.getString("Cidade"));
+				cliente.setEstado(rset.getString("Estado"));
 			} catch(Exception e) { e.printStackTrace(); }
 			
 			finally{
